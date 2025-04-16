@@ -53,9 +53,9 @@ export function SlidesContainer() {
   });
   
   return (
-    <div className="slides-container relative min-h-screen bg-[#f9f9f9]">
+    <div className="slides-container relative min-h-screen bg-white">
       {/* Animated background with data structure icons */}
-      <div className="fixed inset-0 overflow-hidden z-0">
+      <div className="fixed inset-0 overflow-hidden z-0 bg-white">
         {backgroundIcons}
       </div>
       
