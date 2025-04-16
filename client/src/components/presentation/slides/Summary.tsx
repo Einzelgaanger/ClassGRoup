@@ -183,69 +183,71 @@ export function Summary() {
           Data Structure Comparison
         </h3>
         
-        <div className="overflow-x-auto">
-          <table className="min-w-full border-collapse">
-            <thead>
-              <tr className="bg-[#0047AB] text-white">
-                <th className="p-3 text-left whitespace-nowrap">Data Structure</th>
-                <th className="p-3 text-center whitespace-nowrap">Access</th>
-                <th className="p-3 text-center whitespace-nowrap">Search</th>
-                <th className="p-3 text-center whitespace-nowrap">Insert</th>
-                <th className="p-3 text-center whitespace-nowrap">Delete</th>
-                <th className="p-3 text-center whitespace-nowrap">Space</th>
-              </tr>
-            </thead>
-            <tbody>
-              {dataStructuresComparison.map((row, index) => (
-                <motion.tr 
-                  key={index}
-                  className="border-b border-gray-200 hover:bg-gray-50"
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.4 + (index * 0.1) }}
-                  viewport={{ once: true }}
-                >
-                  <td className="p-3 font-bold flex items-center whitespace-nowrap">
-                    <span className="text-xl mr-2">{row.icon}</span>
-                    {row.name}
-                  </td>
-                  <td className="p-3 text-center">
-                    <span 
-                      className="inline-block px-2 py-1 rounded-md text-white text-sm"
-                      style={{ backgroundColor: row.access.color }}
-                    >
-                      {row.access.value}
-                    </span>
-                  </td>
-                  <td className="p-3 text-center">
-                    <span 
-                      className="inline-block px-2 py-1 rounded-md text-white text-sm"
-                      style={{ backgroundColor: row.search.color }}
-                    >
-                      {row.search.value}
-                    </span>
-                  </td>
-                  <td className="p-3 text-center">
-                    <span 
-                      className="inline-block px-2 py-1 rounded-md text-white text-sm"
-                      style={{ backgroundColor: row.insert.color }}
-                    >
-                      {row.insert.value}
-                    </span>
-                  </td>
-                  <td className="p-3 text-center">
-                    <span 
-                      className="inline-block px-2 py-1 rounded-md text-white text-sm"
-                      style={{ backgroundColor: row.delete.color }}
-                    >
-                      {row.delete.value}
-                    </span>
-                  </td>
-                  <td className="p-3 text-center font-medium">{row.space}</td>
-                </motion.tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="overflow-x-auto -mx-5 px-5">
+          <div className="min-w-[800px]">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-[#0047AB] text-white sticky top-0">
+                  <th className="p-3 text-left whitespace-nowrap">Data Structure</th>
+                  <th className="p-3 text-center whitespace-nowrap">Access</th>
+                  <th className="p-3 text-center whitespace-nowrap">Search</th>
+                  <th className="p-3 text-center whitespace-nowrap">Insert</th>
+                  <th className="p-3 text-center whitespace-nowrap">Delete</th>
+                  <th className="p-3 text-center whitespace-nowrap">Space</th>
+                </tr>
+              </thead>
+              <tbody>
+                {dataStructuresComparison.map((row, index) => (
+                  <motion.tr 
+                    key={index}
+                    className="border-b border-gray-200 hover:bg-gray-50"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.4 + (index * 0.1) }}
+                    viewport={{ once: true }}
+                  >
+                    <td className="p-3 font-bold flex items-center whitespace-nowrap">
+                      <span className="text-xl mr-2">{row.icon}</span>
+                      {row.name}
+                    </td>
+                    <td className="p-3 text-center">
+                      <span 
+                        className="inline-block px-2 py-1 rounded-md text-white text-sm"
+                        style={{ backgroundColor: row.access.color }}
+                      >
+                        {row.access.value}
+                      </span>
+                    </td>
+                    <td className="p-3 text-center">
+                      <span 
+                        className="inline-block px-2 py-1 rounded-md text-white text-sm"
+                        style={{ backgroundColor: row.search.color }}
+                      >
+                        {row.search.value}
+                      </span>
+                    </td>
+                    <td className="p-3 text-center">
+                      <span 
+                        className="inline-block px-2 py-1 rounded-md text-white text-sm"
+                        style={{ backgroundColor: row.insert.color }}
+                      >
+                        {row.insert.value}
+                      </span>
+                    </td>
+                    <td className="p-3 text-center">
+                      <span 
+                        className="inline-block px-2 py-1 rounded-md text-white text-sm"
+                        style={{ backgroundColor: row.delete.color }}
+                      >
+                        {row.delete.value}
+                      </span>
+                    </td>
+                    <td className="p-3 text-center font-medium">{row.space}</td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
         
         <div className="text-xs mt-3 text-gray-600 px-2">

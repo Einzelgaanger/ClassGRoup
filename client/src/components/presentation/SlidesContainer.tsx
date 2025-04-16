@@ -105,7 +105,7 @@ export function SlidesContainer() {
         </div>
       )}
       
-      <div className="relative z-10 pb-20">
+      <div className="relative z-10 pb-8">
         <Introduction />
         <Arrays />
         <LinkedLists />
