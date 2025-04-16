@@ -288,25 +288,29 @@ export function Trees() {
                 </div>
                 
                 <h4 className="font-bold mb-2 text-[#FFD700] mt-6">BST Operations:</h4>
-                <div className="grid grid-cols-3 gap-2">
-                  {[
-                    { op: "Search", complexity: "O(log n)", icon: "🔍" },
-                    { op: "Insert", complexity: "O(log n)", icon: "➕" },
-                    { op: "Delete", complexity: "O(log n)", icon: "❌" }
-                  ].map((item, index) => (
-                    <motion.div 
-                      key={index}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: 0.9 + (index * 0.1) }}
-                      viewport={{ once: true }}
-                      className="bg-white p-2 rounded shadow text-center"
-                    >
-                      <div className="text-xl mb-1">{item.icon}</div>
-                      <div className="font-medium text-sm">{item.op}</div>
-                      <div className="text-xs text-gray-600">{item.complexity}</div>
-                    </motion.div>
-                  ))}
+                <div className="overflow-x-auto">
+                  <div className="min-w-[300px]">
+                    <div className="grid grid-cols-3 gap-2">
+                      {[
+                        { op: "Search", complexity: "O(log n)", icon: "🔍" },
+                        { op: "Insert", complexity: "O(log n)", icon: "➕" },
+                        { op: "Delete", complexity: "O(log n)", icon: "❌" }
+                      ].map((item, index) => (
+                        <motion.div 
+                          key={index}
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3, delay: 0.9 + (index * 0.1) }}
+                          viewport={{ once: true }}
+                          className="bg-white p-2 rounded shadow text-center"
+                        >
+                          <div className="text-xl mb-1">{item.icon}</div>
+                          <div className="font-medium text-sm">{item.op}</div>
+                          <div className="text-xs text-gray-600">{item.complexity}</div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </motion.div>
               

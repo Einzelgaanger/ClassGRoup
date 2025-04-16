@@ -53,7 +53,7 @@ export function SlidesContainer() {
   });
   
   return (
-    <div className="slides-container relative">
+    <div className="slides-container relative min-h-screen bg-[#f9f9f9]">
       {/* Animated background with data structure icons */}
       <div className="fixed inset-0 overflow-hidden z-0">
         {backgroundIcons}
@@ -105,7 +105,7 @@ export function SlidesContainer() {
         </div>
       )}
       
-      <div className="pb-20">
+      <div className="relative z-10 pb-20">
         <Introduction />
         <Arrays />
         <LinkedLists />
