@@ -21,7 +21,7 @@ export function SlidesContainer() {
     const randomSize = Math.floor(Math.random() * 12) + 8; // 8px to 20px
     const randomOpacity = (Math.random() * 0.08) + 0.02; // 0.02 to 0.10
     const randomDuration = 5 + Math.random() * 20; // 5-25 seconds
-    const randomDelay = Math.random() * 5; // 0-5 seconds delay
+    const randomDelay = Math.random() * 5;
     
     return (
       <motion.div 
