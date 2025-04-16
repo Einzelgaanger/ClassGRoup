@@ -59,15 +59,15 @@ export function StacksQueues() {
                   <motion.div
                     className="w-12 h-12 rounded-full bg-[#0047AB] mx-auto mb-3 text-white flex items-center justify-center text-2xl"
                     initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: 0.5, type: "spring" }}
-                    viewport={{ once: true }}
-                    animate={{
-                      y: [0, -10, 0],
+                    animate={{ 
+                      opacity: 1, 
+                      scale: 1,
+                      y: [0, -10, 0] 
                     }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 2.5,
+                    transition={{ 
+                      opacity: { duration: 0.4, delay: 0.5 },
+                      scale: { duration: 0.4, delay: 0.5 },
+                      y: { repeat: Infinity, duration: 2.5 }
                     }}
                   >
                     ↕️
