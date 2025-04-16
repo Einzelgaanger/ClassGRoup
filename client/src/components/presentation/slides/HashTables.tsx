@@ -134,49 +134,49 @@ export function HashTables() {
                   How Hashing Works
                 </h4>
                 
-                <div className="overflow-x-auto">
-                  <div className="min-w-[500px]">
+                <div className="overflow-x-auto w-full -mx-4 px-4">
+                  <div className="min-w-[300px] md:min-w-[500px]">
                     {/* Hash Table Visualization */}
                     {hashExamples.map((item, index) => (
                       <motion.div 
                         key={index}
-                        className="flex items-center mb-4"
+                        className="flex items-center mb-4 gap-2"
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.4, delay: 0.5 + (index * 0.2) }}
                         viewport={{ once: true }}
                       >
-                        <div className="w-24 text-right pr-2 font-medium">Key: "{item.key}"</div>
+                        <div className="w-20 text-right pr-2 font-medium text-sm">Key: "{item.key}"</div>
                         
                         <motion.div 
-                          className="w-20 text-center"
+                          className="w-16 text-center"
                           whileHover={{ scale: 1.1 }}
                         >
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline text-[#0047AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline text-[#0047AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                           </svg>
                           <div className="text-xs">Hash Function</div>
                         </motion.div>
                         
                         <motion.div 
-                          className="w-12 h-10 bg-[#FFD700] text-black flex items-center justify-center rounded-lg shadow-md"
+                          className="w-10 h-8 bg-[#FFD700] text-black flex items-center justify-center rounded-lg shadow-md"
                           whileHover={{ scale: 1.2, rotate: 5 }}
                         >
-                          <span className="font-bold">{item.hashIndex}</span>
+                          <span className="font-bold text-sm">{item.hashIndex}</span>
                         </motion.div>
                         
                         <motion.div 
-                          className="w-20 text-center"
+                          className="w-16 text-center"
                           whileHover={{ scale: 1.1 }}
                         >
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline text-[#0047AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline text-[#0047AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                           </svg>
                           <div className="text-xs">Index</div>
                         </motion.div>
                         
                         <motion.div 
-                          className="flex-1 bg-[#F3F4F6] p-2 rounded border border-gray-200 shadow-sm"
+                          className="flex-1 bg-[#F3F4F6] p-2 rounded border border-gray-200 shadow-sm text-sm"
                           whileHover={{ y: -2 }}
                         >
                           <span className="font-medium text-[#0047AB]">Value:</span> {item.value}
@@ -226,8 +226,8 @@ export function HashTables() {
                 viewport={{ once: true }}
               >
                 <h4 className="font-bold text-lg mb-2 text-[#0047AB]">Time Complexity</h4>
-                <div className="overflow-x-auto">
-                  <table className="min-w-full text-sm">
+                <div className="overflow-x-auto w-full">
+                  <table className="min-w-[300px] md:min-w-full text-sm">
                     <thead>
                       <tr>
                         <th className="py-2 px-3 text-left">Operation</th>

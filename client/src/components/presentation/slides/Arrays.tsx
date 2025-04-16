@@ -99,9 +99,9 @@ export function Arrays() {
         </motion.div>
 
         {/* Features section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl mx-auto overflow-x-auto">
           <motion.div
-            className="bg-white rounded-xl shadow-md overflow-hidden border border-[#0047AB] flex flex-col"
+            className="bg-white rounded-xl shadow-md overflow-hidden border border-[#0047AB] flex flex-col min-w-[280px]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
