@@ -310,61 +310,7 @@ export function HashTables() {
                 ))}
               </div>
               
-              <motion.div 
-                className="mt-6 p-5 bg-[#F9FAFB] rounded-lg border border-gray-200"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1.2 }}
-                viewport={{ once: true }}
-              >
-                <h4 className="font-bold text-lg mb-3 text-[#0047AB]">
-                  <span className="mr-2">📝</span>
-                  Implementation Example
-                </h4>
-                
-                <motion.div 
-                  className="bg-[#1E293B] text-[#E2E8F0] p-4 rounded font-mono text-sm overflow-x-auto"
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 1.3 }}
-                  viewport={{ once: true }}
-                >
-                  <pre className="whitespace-pre-wrap" style={{ overflowWrap: 'anywhere' }}>
-{`function hash(key, tableSize) {
-  let total = 0;
-  for (let char of key) {
-    total += char.charCodeAt(0);
-  }
-  return total % tableSize;
-}
-
-// Example
-const key = "apple";
-const index = hash(key, 10); // Output: 3`}
-                  </pre>
-                </motion.div>
-                
-                <div className="grid grid-cols-2 gap-3 mt-4">
-                  {[
-                    { label: "MD5", desc: "128-bit cryptographic hash" },
-                    { label: "SHA-256", desc: "Secure Hash Algorithm" },
-                    { label: "FNV-1a", desc: "Fast non-cryptographic hash" },
-                    { label: "MurmurHash", desc: "Fast, general-purpose hash" }
-                  ].map((algo, index) => (
-                    <motion.div
-                      key={index}
-                      className="bg-white p-2 rounded border border-gray-200 text-sm"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3, delay: 1.4 + (index * 0.1) }}
-                      viewport={{ once: true }}
-                    >
-                      <div className="font-medium">{algo.label}</div>
-                      <div className="text-xs text-gray-600">{algo.desc}</div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
+              {/* No code examples as per user request */}
             </div>
           </div>
         </motion.div>

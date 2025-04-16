@@ -470,11 +470,7 @@ export function Graphs() {
                         ))}
                       </div>
                       
-                      <div className="overflow-x-auto text-xs">
-                        <div className="bg-[#1E293B] text-[#E2E8F0] p-2 rounded font-mono whitespace-pre" style={{ maxHeight: "100px" }}>
-                          {algo.pseudocode}
-                        </div>
-                      </div>
+                      {/* No code examples as per user request */}
                     </div>
                   </motion.div>
                 ))}

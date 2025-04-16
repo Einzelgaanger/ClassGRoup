@@ -22,13 +22,14 @@ export function LinkedLists() {
       {/* Main Linked List Visualization */}
       <div className="w-full px-4">
         <motion.div 
-          className="w-full max-w-4xl mx-auto bg-white rounded-xl p-8 shadow-md border border-[#0047AB] mb-12 overflow-x-auto"
+          className="w-full max-w-4xl mx-auto bg-white rounded-xl p-4 md:p-8 shadow-md border border-[#0047AB] mb-8 overflow-x-auto"
+          style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="flex items-center justify-center min-w-max">
+          <div className="flex items-center justify-center min-w-max overflow-x-auto pb-2">
             {/* Head pointer */}
             <motion.div
               className="flex flex-col items-center mr-4"
