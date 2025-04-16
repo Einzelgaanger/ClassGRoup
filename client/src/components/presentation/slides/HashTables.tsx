@@ -61,36 +61,34 @@ const applications = [
 export function HashTables() {
   return (
     <Slide id="hash-tables">
-      {/* Floating hash icons background */}
-      <div className="absolute inset-0 overflow-hidden">
-        {Array(15).fill(null).map((_, i) => {
-          // Hash-related emojis
-          const icons = ["🔑", "🧮", "#️⃣", "🔢", "📋", "🔍", "📊", "⚡"];
-          const randomIcon = icons[Math.floor(Math.random() * icons.length)];
-          return (
-            <motion.div 
-              key={i}
-              className="absolute text-xl select-none pointer-events-none text-[#FFD700] opacity-10"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -30, 0],
-                rotate: [0, Math.random() > 0.5 ? 10 : -10, 0]
-              }}
-              transition={{
-                duration: 5 + Math.random() * 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: Math.random() * 2
-              }}
-            >
-              {randomIcon}
-            </motion.div>
-          );
-        })}
-      </div>
+      {/* Floating hash icons */}
+      {Array(15).fill(null).map((_, i) => {
+        // Hash-related emojis
+        const icons = ["🔑", "🧮", "#️⃣", "🔢", "📋", "🔍", "📊", "⚡"];
+        const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+        return (
+          <motion.div 
+            key={i}
+            className="absolute text-xl select-none pointer-events-none text-[#FFD700] opacity-10"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              rotate: [0, Math.random() > 0.5 ? 10 : -10, 0]
+            }}
+            transition={{
+              duration: 5 + Math.random() * 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: Math.random() * 2
+            }}
+          >
+            {randomIcon}
+          </motion.div>
+        );
+      })}
     
       <motion.h2 
         className="font-bold text-3xl md:text-5xl text-center text-[#FFD700] mb-6"
