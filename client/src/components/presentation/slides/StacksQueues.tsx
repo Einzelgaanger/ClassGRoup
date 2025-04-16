@@ -1,253 +1,316 @@
 import { Slide } from "../Slide";
-import { CodeBlock } from "../CodeBlock";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-
-const stackCodeExample = `class Stack {
-  constructor() {
-    this.items = [];
-  }
-  
-  push(element) {
-    this.items.push(element);
-  }
-  
-  pop() {
-    if (this.isEmpty()) return "Underflow";
-    return this.items.pop();
-  }
-  
-  isEmpty() {
-    return this.items.length === 0;
-  }
-}`;
-
-const queueCodeExample = `class Queue {
-  constructor() {
-    this.items = {};
-    this.frontIndex = 0;
-    this.backIndex = 0;
-  }
-  
-  enqueue(element) {
-    this.items[this.backIndex] = element;
-    this.backIndex++;
-  }
-  
-  dequeue() {
-    if (this.isEmpty()) return "Underflow";
-    const item = this.items[this.frontIndex];
-    delete this.items[this.frontIndex];
-    this.frontIndex++;
-    return item;
-  }
-  
-  isEmpty() {
-    return this.frontIndex === this.backIndex;
-  }
-}`;
 
 export function StacksQueues() {
   return (
     <Slide id="stacks-queues">
-      <motion.h2 
-        className="font-bold text-3xl md:text-5xl text-center text-primary mb-8"
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
-      >
-        Stacks & Queues
-      </motion.h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-        {/* Stack Section */}
+      <div className="relative">
+        {/* Background pattern */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M0%200h4v4H0V0zm8%200h4v4H8V0zm8%200h4v4h-4V0zM0%208h4v4H0V8zm8%200h4v4H8V8zm8%200h4v4h-4V8zM0%2016h4v4H0v-4zm8%200h4v4H8v-4zm8%200h4v4h-4v-4z%22%20fill%3D%22%23000000%22%20fill-opacity%3D%220.03%22%20fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E')] opacity-50 pointer-events-none z-0"></div>
+        
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          className="relative z-10 text-center mb-8"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <Card className="border-t-4 border-secondary">
-            <CardContent className="p-6">
-              <h3 className="font-semibold text-2xl mb-4 text-secondary">Stacks</h3>
-              <p className="mb-4">A collection that follows the Last-In-First-Out (LIFO) principle.</p>
-              
-              <div className="flex justify-center my-6">
-                {/* Stack Visualization */}
-                <div className="relative w-48 h-64 border-2 border-secondary rounded-lg flex flex-col-reverse items-center justify-start p-4">
-                  {[
-                    { label: "Item 1 (Bottom)", delay: 0.6 },
-                    { label: "Item 2", delay: 0.8 },
-                    { label: "Item 3 (Top)", delay: 1.0 }
-                  ].map((item, index) => (
-                    <motion.div 
-                      key={index}
-                      className="w-40 h-12 bg-secondary text-white m-1 rounded flex items-center justify-center"
-                      initial={{ opacity: 0, x: -50 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: item.delay }}
-                      viewport={{ once: true }}
-                    >
-                      <span>{item.label}</span>
-                    </motion.div>
-                  ))}
-                  <motion.div 
-                    className="absolute -right-20 top-1/2 transform -translate-y-1/2"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 1.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className="bg-gray-100 p-2 rounded-lg text-sm">
-                      <p>Push → Top</p>
-                      <p>Pop ← Top</p>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-              
-              <h4 className="font-semibold mb-2">Core Operations: (All O(1))</h4>
-              <motion.ul 
-                className="list-disc list-inside space-y-1 mb-4"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 1.2 }}
-                viewport={{ once: true }}
-              >
-                <li><b>Push:</b> Add element to top</li>
-                <li><b>Pop:</b> Remove element from top</li>
-                <li><b>Peek/Top:</b> View top element</li>
-                <li><b>isEmpty:</b> Check if stack is empty</li>
-              </motion.ul>
-              
-              <CodeBlock language="javascript" code={stackCodeExample} delay={1.3} />
-            </CardContent>
-          </Card>
+          <h2 className="font-black text-4xl md:text-6xl text-[#0047AB] mb-2">
+            Stacks & Queues
+          </h2>
+          <p className="text-gray-700 max-w-3xl mx-auto">
+            Linear data structures that follow specific patterns for adding and removing elements
+          </p>
         </motion.div>
         
-        {/* Queue Section */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <Card className="border-t-4 border-accent">
-            <CardContent className="p-6">
-              <h3 className="font-semibold text-2xl mb-4 text-accent">Queues</h3>
-              <p className="mb-4">A collection that follows the First-In-First-Out (FIFO) principle.</p>
-              
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12 max-w-6xl mx-auto px-4">
+          {/* Stack Section */}
+          <motion.div
+            className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#0047AB]"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -5, boxShadow: "0 20px 25px -5px rgba(0, 71, 171, 0.1)" }}
+          >
+            <div className="bg-[#0047AB] p-6 text-white">
+              <h3 className="font-bold text-2xl flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+                Stacks
+              </h3>
+              <p className="mt-1 text-white text-opacity-90">Last-In-First-Out (LIFO)</p>
+            </div>
+            
+            <div className="p-6">
               <div className="flex justify-center my-6">
-                {/* Queue Visualization */}
-                <div className="relative w-64 h-48 border-2 border-accent rounded-lg flex items-center justify-center p-4">
-                  <motion.div 
-                    className="flex"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
+                {/* Stack Visualization */}
+                <div className="relative mb-6">
+                  <motion.div
+                    className="mb-1 text-sm font-bold text-center text-[#0047AB]"
+                    initial={{ opacity: 0, y: -10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.4 }}
                     viewport={{ once: true }}
                   >
-                    {[1, 2, 3].map((value, index) => (
+                    PUSH/POP
+                  </motion.div>
+                  <motion.div
+                    className="w-12 h-12 rounded-full bg-[#0047AB] mx-auto mb-3 text-white flex items-center justify-center text-2xl"
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.5, type: "spring" }}
+                    viewport={{ once: true }}
+                    animate={{
+                      y: [0, -10, 0],
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 2.5,
+                    }}
+                  >
+                    ↕️
+                  </motion.div>
+                  
+                  <div className="w-48 border-4 border-[#0047AB] rounded-lg overflow-hidden">
+                    {/* Stack items */}
+                    {[
+                      { value: "TOP ITEM", color: "#FFD700" },
+                      { value: "MIDDLE ITEM", color: "#0047AB" },
+                      { value: "BOTTOM ITEM", color: "#00A86B" }
+                    ].map((item, index) => (
                       <motion.div 
                         key={index}
-                        className="w-14 h-14 bg-accent text-white m-1 rounded flex items-center justify-center"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3, delay: 0.7 + (index * 0.2) }}
+                        className="p-3 text-white font-bold text-center relative"
+                        style={{ backgroundColor: item.color }}
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 0.6 + (0.15 * (3-index)) }}
                         viewport={{ once: true }}
+                        whileHover={{ x: 5 }}
                       >
-                        <span>{value}</span>
+                        {item.value}
                       </motion.div>
                     ))}
-                  </motion.div>
-                  <motion.div 
-                    className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.4, delay: 1.2 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className="bg-gray-100 p-2 rounded-lg text-sm">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                      </svg>
-                      Enqueue
-                    </div>
-                  </motion.div>
-                  <motion.div 
-                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-6"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.4, delay: 1.3 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className="bg-gray-100 p-2 rounded-lg text-sm">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                      </svg>
-                      Dequeue
-                    </div>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
               
-              <h4 className="font-semibold mb-2">Core Operations: (All O(1))</h4>
-              <motion.ul 
-                className="list-disc list-inside space-y-1 mb-4"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 1.4 }}
-                viewport={{ once: true }}
-              >
-                <li><b>Enqueue:</b> Add element to rear</li>
-                <li><b>Dequeue:</b> Remove element from front</li>
-                <li><b>Front:</b> View front element</li>
-                <li><b>isEmpty:</b> Check if queue is empty</li>
-              </motion.ul>
+              <div className="mt-6 space-y-4">
+                <motion.div
+                  className="bg-gray-50 p-4 rounded-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 1.1 }}
+                  viewport={{ once: true }}
+                >
+                  <h4 className="font-bold text-lg mb-2 text-[#0047AB]">Key Operations</h4>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="bg-white p-2 rounded border border-gray-200">
+                      <div className="font-semibold">Push</div>
+                      <div className="text-sm text-gray-600">Add to top</div>
+                    </div>
+                    <div className="bg-white p-2 rounded border border-gray-200">
+                      <div className="font-semibold">Pop</div>
+                      <div className="text-sm text-gray-600">Remove from top</div>
+                    </div>
+                  </div>
+                </motion.div>
+                
+                <motion.div
+                  className="bg-[#0047AB] bg-opacity-10 p-4 rounded-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 1.2 }}
+                  viewport={{ once: true }}
+                >
+                  <h4 className="font-bold mb-2">Real-world Examples</h4>
+                  <ul className="space-y-1 text-sm">
+                    <li className="flex items-center">
+                      <span className="mr-2">🌐</span>
+                      <span>Browser history (back button)</span>
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2">⚙️</span>
+                      <span>Function call tracking</span>
+                    </li>
+                  </ul>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+          
+          {/* Queue Section */}
+          <motion.div
+            className="bg-white rounded-xl shadow-lg overflow-hidden border border-[#FFD700]"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -5, boxShadow: "0 20px 25px -5px rgba(255, 215, 0, 0.1)" }}
+          >
+            <div className="bg-[#FFD700] p-6 text-black">
+              <h3 className="font-bold text-2xl flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+                Queues
+              </h3>
+              <p className="mt-1 text-black text-opacity-80">First-In-First-Out (FIFO)</p>
+            </div>
+            
+            <div className="p-6">
+              <div className="flex justify-center my-6">
+                {/* Queue Visualization */}
+                <div className="relative mb-6">
+                  <div className="flex flex-col items-center">
+                    <div className="flex items-center justify-between w-full mb-8">
+                      <motion.div
+                        className="text-center"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 0.5 }}
+                        viewport={{ once: true }}
+                      >
+                        <div className="mb-1 text-sm font-bold text-[#FFD700]">FRONT (DEQUEUE)</div>
+                        <motion.div
+                          animate={{ x: [0, 5, 0] }}
+                          transition={{ repeat: Infinity, duration: 2 }}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto text-[#FFD700]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </motion.div>
+                      </motion.div>
+                      
+                      <motion.div
+                        className="text-center"
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 0.5 }}
+                        viewport={{ once: true }}
+                      >
+                        <div className="mb-1 text-sm font-bold text-[#FFD700]">REAR (ENQUEUE)</div>
+                        <motion.div
+                          animate={{ x: [0, -5, 0] }}
+                          transition={{ repeat: Infinity, duration: 2 }}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-auto text-[#FFD700]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                          </svg>
+                        </motion.div>
+                      </motion.div>
+                    </div>
+                    
+                    <div className="w-64 h-16 border-4 border-[#FFD700] rounded-lg overflow-hidden">
+                      <div className="flex h-full">
+                        {[
+                          { id: 1, color: "#00A86B" },
+                          { id: 2, color: "#0047AB" },
+                          { id: 3, color: "#FFD700" },
+                          { id: 4, color: "black" }
+                        ].map((item, index) => (
+                          <motion.div
+                            key={index}
+                            className="flex-1 h-full flex items-center justify-center text-white font-bold"
+                            style={{ backgroundColor: item.color }}
+                            initial={{ opacity: 0, scale: 0 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.3, delay: 0.7 + (index * 0.15) }}
+                            viewport={{ once: true }}
+                          >
+                            {item.id}
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               
-              <CodeBlock language="javascript" code={queueCodeExample} delay={1.5} />
-            </CardContent>
-          </Card>
+              <div className="mt-6 space-y-4">
+                <motion.div
+                  className="bg-gray-50 p-4 rounded-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 1.3 }}
+                  viewport={{ once: true }}
+                >
+                  <h4 className="font-bold text-lg mb-2 text-[#FFD700]">Key Operations</h4>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="bg-white p-2 rounded border border-gray-200">
+                      <div className="font-semibold">Enqueue</div>
+                      <div className="text-sm text-gray-600">Add to rear</div>
+                    </div>
+                    <div className="bg-white p-2 rounded border border-gray-200">
+                      <div className="font-semibold">Dequeue</div>
+                      <div className="text-sm text-gray-600">Remove from front</div>
+                    </div>
+                  </div>
+                </motion.div>
+                
+                <motion.div
+                  className="bg-[#FFD700] bg-opacity-10 p-4 rounded-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 1.4 }}
+                  viewport={{ once: true }}
+                >
+                  <h4 className="font-bold mb-2">Real-world Examples</h4>
+                  <ul className="space-y-1 text-sm">
+                    <li className="flex items-center">
+                      <span className="mr-2">🖨️</span>
+                      <span>Printer job queue</span>
+                    </li>
+                    <li className="flex items-center">
+                      <span className="mr-2">👥</span>
+                      <span>Customer service line</span>
+                    </li>
+                  </ul>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+        
+        {/* Bottom Section */}
+        <motion.div 
+          className="bg-black text-white rounded-xl p-6 max-w-5xl mx-auto mb-4"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.5 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="font-bold text-xl mb-4 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            Key Differences
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { title: "Insertion & Removal", stack: "Same end (top)", queue: "Different ends (rear, front)" },
+              { title: "Order", stack: "LIFO (Last In, First Out)", queue: "FIFO (First In, First Out)" },
+              { title: "Use Case", stack: "When order should be reversed", queue: "When processing order matters" }
+            ].map((item, index) => (
+              <motion.div 
+                key={index}
+                className="bg-white text-black rounded-lg p-4 shadow-sm"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 1.6 + (index * 0.1) }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5 }}
+              >
+                <h4 className="font-bold text-sm mb-2">{item.title}</h4>
+                <p className="text-xs font-medium text-[#0047AB]">Stack: {item.stack}</p>
+                <p className="text-xs font-medium text-[#FFD700] mt-1">Queue: {item.queue}</p>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
-      
-      {/* Real-world Applications */}
-      <motion.div 
-        className="bg-primary bg-opacity-10 rounded-xl p-6 max-w-5xl mx-auto"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 1.6 }}
-        viewport={{ once: true }}
-      >
-        <h3 className="font-semibold text-xl mb-4 text-primary">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          Real-world Applications
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {[
-            { title: "Stack: Browser History", description: "Back button uses a stack to navigate to previously visited pages", color: "secondary" },
-            { title: "Stack: Function Calls", description: "Call stack for tracking nested function execution", color: "secondary" },
-            { title: "Queue: Print Jobs", description: "Documents waiting to be printed are processed in order", color: "accent" },
-            { title: "Queue: Customer Support", description: "Customers waiting in line for service", color: "accent" }
-          ].map((item, index) => (
-            <motion.div 
-              key={index}
-              className={`bg-white rounded-lg p-4 shadow-sm border-l-4 border-${item.color}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 1.7 + (index * 0.1) }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-            >
-              <h4 className="font-medium">{item.title}</h4>
-              <p className="text-sm mt-1">{item.description}</p>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
     </Slide>
   );
 }

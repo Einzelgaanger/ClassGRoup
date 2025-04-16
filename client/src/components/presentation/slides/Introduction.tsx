@@ -1,7 +1,10 @@
 import { Slide } from "../Slide";
 import { motion } from "framer-motion";
+import { useSlidesContext } from "@/hooks/use-slides";
 
 export function Introduction() {
+  const { goToSlide } = useSlidesContext();
+  
   return (
     <Slide id="introduction">
       <div className="flex flex-col items-center justify-between gap-8">
@@ -12,14 +15,14 @@ export function Introduction() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h1 className="font-bold text-4xl md:text-6xl text-primary mb-4">
-            Algorithms & Data Structures
+          <h1 className="font-black text-5xl md:text-7xl mb-4 text-[#0047AB]">
+            Algorithms &<br/>Data Structures
           </h1>
-          <p className="text-lg text-gray-800 mb-2 max-w-2xl mx-auto">
+          <p className="text-lg font-semibold text-gray-800 mb-2 max-w-2xl mx-auto">
             A visual guide for Statistics and Data Science students
           </p>
           <motion.p
-            className="text-sm text-gray-600 mb-2"
+            className="text-md text-gray-700 mb-6"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
@@ -27,6 +30,21 @@ export function Introduction() {
           >
             Presented by: Janice, Zamzam, Mukisa, Alfred
           </motion.p>
+          
+          <motion.button
+            onClick={() => goToSlide("next")}
+            className="mt-4 bg-[#0047AB] hover:bg-[#003885] text-white font-bold py-3 px-10 rounded-lg text-lg shadow-lg transform transition-transform duration-200 hover:scale-105"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            viewport={{ once: true }}
+            whileHover={{ 
+              boxShadow: "0 10px 25px -5px rgba(0, 71, 171, 0.5)",
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Get Started
+          </motion.button>
         </motion.div>
 
         <motion.div 
