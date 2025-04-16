@@ -1,48 +1,99 @@
 import { Slide } from "../Slide";
-import { CodeBlock } from "../CodeBlock";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
 
-const hashTableCode = `class HashTable {
-  constructor(size = 53) {
-    this.table = new Array(size);
+// Hash table visualization data
+const hashExamples = [
+  { key: "apple", hashIndex: 2, value: '{color: "red", count: 5}' },
+  { key: "banana", hashIndex: 0, value: '{color: "yellow", count: 8}' },
+  { key: "cherry", hashIndex: 4, value: '{color: "red", count: 12}' }
+];
+
+// Collision handling methods
+const collisionMethods = [
+  { 
+    title: "Chaining", 
+    description: "Store multiple key-value pairs at the same index using a linked list",
+    color: "#0047AB",
+    icon: "🔗"
+  },
+  { 
+    title: "Open Addressing", 
+    description: "Find the next empty slot by probing (linear, quadratic, double hashing)",
+    color: "#FFD700",
+    icon: "🔍"
+  },
+  { 
+    title: "Robin Hood Hashing", 
+    description: "Rich items give to poor items during insert",
+    color: "#00A86B",
+    icon: "🏹"
   }
-  
-  _hash(key) {
-    let total = 0;
-    for(let i = 0; i < key.length; i++) {
-      total += key.charCodeAt(i);
-    }
-    return total % this.table.length;
+];
+
+// Real-world applications
+const applications = [
+  { 
+    icon: "database", 
+    title: "Database Indexing", 
+    description: "Fast record lookup",
+    emoji: "🗄️" 
+  },
+  { 
+    icon: "users", 
+    title: "User Sessions", 
+    description: "Storing active sessions by ID",
+    emoji: "👥" 
+  },
+  { 
+    icon: "spell", 
+    title: "Spell Checkers", 
+    description: "Fast word verification",
+    emoji: "✅" 
+  },
+  { 
+    icon: "cache", 
+    title: "Caching", 
+    description: "Store frequently accessed data",
+    emoji: "⚡" 
   }
-  
-  set(key, value) {
-    const index = this._hash(key);
-    if(!this.table[index]) {
-      this.table[index] = [];
-    }
-    this.table[index].push([key, value]);
-    return index;
-  }
-  
-  get(key) {
-    const index = this._hash(key);
-    if(!this.table[index]) return undefined;
-    
-    for(let i = 0; i < this.table[index].length; i++) {
-      if(this.table[index][i][0] === key) {
-        return this.table[index][i][1];
-      }
-    }
-    return undefined;
-  }
-}`;
+];
 
 export function HashTables() {
   return (
     <Slide id="hash-tables">
+      {/* Floating hash icons background */}
+      <div className="absolute inset-0 overflow-hidden">
+        {Array(15).fill(null).map((_, i) => {
+          // Hash-related emojis
+          const icons = ["🔑", "🧮", "#️⃣", "🔢", "📋", "🔍", "📊", "⚡"];
+          const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+          return (
+            <motion.div 
+              key={i}
+              className="absolute text-xl select-none pointer-events-none text-[#FFD700] opacity-10"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                rotate: [0, Math.random() > 0.5 ? 10 : -10, 0]
+              }}
+              transition={{
+                duration: 5 + Math.random() * 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: Math.random() * 2
+              }}
+            >
+              {randomIcon}
+            </motion.div>
+          );
+        })}
+      </div>
+    
       <motion.h2 
-        className="font-bold text-3xl md:text-5xl text-center text-primary mb-8"
+        className="font-bold text-3xl md:text-5xl text-center text-[#FFD700] mb-6"
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -51,183 +102,304 @@ export function HashTables() {
         Hash Tables
       </motion.h2>
       
-      <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
+      <div className="flex flex-col md:flex-row items-start gap-6 md:gap-8 mb-8">
         <motion.div 
-          className="md:w-1/2"
+          className="w-full md:w-1/2"
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="font-semibold text-xl mb-4">What is a Hash Table?</h3>
-              <p className="mb-4">A data structure that stores key-value pairs and uses a hash function to compute an index for fast access.</p>
-              
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-[#FFD700]">
+            <div className="bg-[#FFD700] p-4 text-black">
+              <h3 className="font-bold text-xl mb-1 flex items-center">
+                <span className="text-2xl mr-2">#️⃣</span>
+                What is a Hash Table?
+              </h3>
+              <p className="text-sm text-black text-opacity-90">Key-value storage with O(1) average time complexity for lookups</p>
+            </div>
+            
+            <div className="p-5">
               <motion.div 
-                className="my-8"
+                className="mb-6 bg-[#F9FAFB] p-4 rounded-lg"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                {/* Hash Table Visualization */}
-                <div className="relative border-2 border-info rounded-lg p-4">
-                  <div className="absolute -top-3 left-4 bg-white px-2 text-info font-medium">Hash Table</div>
-                  
-                  {[
-                    { key: "apple", hashIndex: 2, value: '{color: "red", count: 5}' },
-                    { key: "banana", hashIndex: 0, value: '{color: "yellow", count: 8}' },
-                    { key: "cherry", hashIndex: 4, value: '{color: "red", count: 12}' }
-                  ].map((item, index) => (
-                    <motion.div 
-                      key={index}
-                      className="flex items-center mb-4"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.5 + (index * 0.2) }}
-                      viewport={{ once: true }}
-                    >
-                      <div className="w-24 text-right pr-2 font-medium">Key: "{item.key}"</div>
-                      <div className="w-20 text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                        <div className="text-xs">Hash Function</div>
-                      </div>
-                      <div className="w-12 h-8 bg-info text-white flex items-center justify-center rounded">
-                        <span>{item.hashIndex}</span>
-                      </div>
-                      <div className="w-20 text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                        <div className="text-xs">Index</div>
-                      </div>
-                      <div className="flex-1 bg-gray-100 p-2 rounded">
-                        <span className="font-medium">Value:</span> {item.value}
-                      </div>
-                    </motion.div>
-                  ))}
+                <h4 className="font-bold text-lg mb-3 text-[#FFD700] flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                  How Hashing Works
+                </h4>
+                
+                <div className="overflow-x-auto">
+                  <div className="min-w-[500px]">
+                    {/* Hash Table Visualization */}
+                    {hashExamples.map((item, index) => (
+                      <motion.div 
+                        key={index}
+                        className="flex items-center mb-4"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 0.5 + (index * 0.2) }}
+                        viewport={{ once: true }}
+                      >
+                        <div className="w-24 text-right pr-2 font-medium">Key: "{item.key}"</div>
+                        
+                        <motion.div 
+                          className="w-20 text-center"
+                          whileHover={{ scale: 1.1 }}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline text-[#0047AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                          <div className="text-xs">Hash Function</div>
+                        </motion.div>
+                        
+                        <motion.div 
+                          className="w-12 h-10 bg-[#FFD700] text-black flex items-center justify-center rounded-lg shadow-md"
+                          whileHover={{ scale: 1.2, rotate: 5 }}
+                        >
+                          <span className="font-bold">{item.hashIndex}</span>
+                        </motion.div>
+                        
+                        <motion.div 
+                          className="w-20 text-center"
+                          whileHover={{ scale: 1.1 }}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline text-[#0047AB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                          <div className="text-xs">Index</div>
+                        </motion.div>
+                        
+                        <motion.div 
+                          className="flex-1 bg-[#F3F4F6] p-2 rounded border border-gray-200 shadow-sm"
+                          whileHover={{ y: -2 }}
+                        >
+                          <span className="font-medium text-[#0047AB]">Value:</span> {item.value}
+                        </motion.div>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
               
-              <h4 className="font-semibold mt-4 mb-2">Hash Function Requirements:</h4>
-              <motion.ul 
-                className="list-disc list-inside space-y-1"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1.2 }}
-                viewport={{ once: true }}
-              >
-                <li>Fast to compute</li>
-                <li>Minimizes collisions</li>
-                <li>Distributes keys uniformly</li>
-                <li>Deterministic (same input → same output)</li>
-              </motion.ul>
-            </CardContent>
-          </Card>
-        </motion.div>
-        
-        <motion.div 
-          className="md:w-1/2"
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <Card>
-            <CardContent className="p-6">
-              <h3 className="font-semibold text-xl mb-4">Hash Table Operations</h3>
-              
               <motion.div 
-                className="bg-gray-100 p-4 rounded-lg mb-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <h4 className="font-semibold mb-2">Core Operations: (Average: O(1), Worst: O(n))</h4>
-                <ul className="list-disc list-inside space-y-1">
-                  <li><b>Insert:</b> Add a new key-value pair</li>
-                  <li><b>Lookup:</b> Retrieve value by key</li>
-                  <li><b>Delete:</b> Remove a key-value pair</li>
-                </ul>
-              </motion.div>
-              
-              <motion.div 
-                className="mb-6"
+                className="mb-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
                 viewport={{ once: true }}
               >
-                <h4 className="font-semibold mb-2">Collision Handling:</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <motion.div 
-                    className="bg-white border border-gray-200 p-3 rounded shadow-sm"
-                    whileHover={{ y: -5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    <h5 className="font-medium text-primary">Chaining</h5>
-                    <p className="text-sm">Store multiple key-value pairs at the same index using a linked list</p>
-                  </motion.div>
-                  <motion.div 
-                    className="bg-white border border-gray-200 p-3 rounded shadow-sm"
-                    whileHover={{ y: -5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    <h5 className="font-medium text-secondary">Open Addressing</h5>
-                    <p className="text-sm">Find the next empty slot by probing (linear, quadratic, double hashing)</p>
-                  </motion.div>
+                <h4 className="font-bold text-lg mb-2 text-[#0047AB]">Hash Function Requirements</h4>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { req: "Fast calculation", icon: "⚡" },
+                    { req: "Minimize collisions", icon: "🛡️" },
+                    { req: "Uniform distribution", icon: "📊" },
+                    { req: "Deterministic output", icon: "🔁" }
+                  ].map((item, index) => (
+                    <motion.div 
+                      key={index}
+                      className="bg-[#F9FAFB] p-3 rounded-lg flex items-center"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: 0.9 + (index * 0.1) }}
+                      viewport={{ once: true }}
+                      whileHover={{ y: -3, backgroundColor: "#F0F4FF" }}
+                    >
+                      <span className="text-xl mr-2">{item.icon}</span>
+                      <span className="text-sm font-medium">{item.req}</span>
+                    </motion.div>
+                  ))}
                 </div>
               </motion.div>
               
-              <CodeBlock 
-                language="javascript" 
-                code={hashTableCode}
-                delay={1}
-              />
-            </CardContent>
-          </Card>
+              <motion.div 
+                className="bg-[#0047AB] bg-opacity-5 p-4 rounded-lg"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 1 }}
+                viewport={{ once: true }}
+              >
+                <h4 className="font-bold text-lg mb-2 text-[#0047AB]">Time Complexity</h4>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full text-sm">
+                    <thead>
+                      <tr>
+                        <th className="py-2 px-3 text-left">Operation</th>
+                        <th className="py-2 px-3 text-left">Average</th>
+                        <th className="py-2 px-3 text-left">Worst</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[
+                        { op: "Insert", avg: "O(1)", worst: "O(n)" },
+                        { op: "Delete", avg: "O(1)", worst: "O(n)" },
+                        { op: "Search", avg: "O(1)", worst: "O(n)" }
+                      ].map((item, index) => (
+                        <motion.tr 
+                          key={index}
+                          className="border-t border-gray-200"
+                          initial={{ opacity: 0, y: 5 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.2, delay: 1.1 + (index * 0.1) }}
+                          viewport={{ once: true }}
+                          whileHover={{ backgroundColor: "#F0F4FF" }}
+                        >
+                          <td className="py-2 px-3 font-medium">{item.op}</td>
+                          <td className="py-2 px-3 text-[#00A86B]">{item.avg}</td>
+                          <td className="py-2 px-3 text-[#FFD700]">{item.worst}</td>
+                        </motion.tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+        
+        <motion.div 
+          className="w-full md:w-1/2"
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-[#0047AB]">
+            <div className="bg-[#0047AB] p-4 text-white">
+              <h3 className="font-bold text-xl mb-1 flex items-center">
+                <motion.div
+                  animate={{ rotate: [0, 15, 0, -15, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  className="mr-2 text-2xl"
+                >
+                  🔀
+                </motion.div>
+                Collision Handling
+              </h3>
+              <p className="text-sm text-white text-opacity-90">When different keys hash to the same index</p>
+            </div>
+            
+            <div className="p-5">
+              <div className="space-y-4">
+                {collisionMethods.map((method, index) => (
+                  <motion.div 
+                    key={index}
+                    className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.6 + (index * 0.2) }}
+                    viewport={{ once: true }}
+                    whileHover={{ y: -5, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)" }}
+                  >
+                    <div className="p-4 border-l-4" style={{ borderColor: method.color }}>
+                      <div className="flex items-start">
+                        <div className="text-2xl mr-3 mt-1">{method.icon}</div>
+                        <div>
+                          <h5 className="font-bold">{method.title}</h5>
+                          <p className="text-sm text-gray-600">{method.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+              
+              <motion.div 
+                className="mt-6 p-5 bg-[#F9FAFB] rounded-lg border border-gray-200"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 1.2 }}
+                viewport={{ once: true }}
+              >
+                <h4 className="font-bold text-lg mb-3 text-[#0047AB]">
+                  <span className="mr-2">📝</span>
+                  Implementation Example
+                </h4>
+                
+                <motion.div 
+                  className="bg-[#1E293B] text-[#E2E8F0] p-4 rounded font-mono text-sm overflow-x-auto"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 1.3 }}
+                  viewport={{ once: true }}
+                >
+                  <pre className="whitespace-pre-wrap" style={{ overflowWrap: 'anywhere' }}>
+{`function hash(key, tableSize) {
+  let total = 0;
+  for (let char of key) {
+    total += char.charCodeAt(0);
+  }
+  return total % tableSize;
+}
+
+// Example
+const key = "apple";
+const index = hash(key, 10); // Output: 3`}
+                  </pre>
+                </motion.div>
+                
+                <div className="grid grid-cols-2 gap-3 mt-4">
+                  {[
+                    { label: "MD5", desc: "128-bit cryptographic hash" },
+                    { label: "SHA-256", desc: "Secure Hash Algorithm" },
+                    { label: "FNV-1a", desc: "Fast non-cryptographic hash" },
+                    { label: "MurmurHash", desc: "Fast, general-purpose hash" }
+                  ].map((algo, index) => (
+                    <motion.div
+                      key={index}
+                      className="bg-white p-2 rounded border border-gray-200 text-sm"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: 1.4 + (index * 0.1) }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="font-medium">{algo.label}</div>
+                      <div className="text-xs text-gray-600">{algo.desc}</div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </motion.div>
       </div>
       
       <motion.div 
-        className="bg-warning bg-opacity-10 rounded-xl p-6 max-w-3xl mx-auto"
+        className="bg-black text-white rounded-xl p-5 max-w-5xl mx-auto mb-6"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 1.2 }}
         viewport={{ once: true }}
       >
-        <h3 className="font-semibold text-xl mb-2 text-warning">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
+        <h3 className="font-bold text-xl mb-3 flex items-center">
+          <span className="text-[#FFD700] mr-2">🌍</span>
           Real-world Applications
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-          {[
-            { icon: "database", title: "Database Indexing", description: "Fast record lookup" },
-            { icon: "users", title: "User Sessions", description: "Storing active sessions by ID" },
-            { icon: "spell", title: "Spell Checkers", description: "Fast word verification" }
-          ].map((item, index) => (
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {applications.map((item, index) => (
             <motion.div 
               key={index}
-              className="bg-white rounded-lg p-3 shadow-sm"
+              className="bg-white text-black rounded-lg p-3 shadow"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 1.4 + (index * 0.1) }}
               viewport={{ once: true }}
-              whileHover={{ y: -5 }}
+              whileHover={{ y: -5, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2)" }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                {item.icon === "database" && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7c-2 0-3 1-3 3z" />}
-                {item.icon === "users" && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />}
-                {item.icon === "spell" && <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />}
-              </svg>
-              <h4 className="font-medium">{item.title}</h4>
-              <p className="text-sm">{item.description}</p>
+              <div className="flex items-start">
+                <div className="text-2xl mr-2">{item.emoji}</div>
+                <div>
+                  <h4 className="font-bold text-sm">{item.title}</h4>
+                  <p className="text-xs text-gray-600">{item.description}</p>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>

@@ -42,7 +42,7 @@ export function Slide({ id, children }: SlideProps) {
     <motion.section
       ref={slideRef}
       id={id}
-      className={`slide min-h-screen flex flex-col justify-start pt-6 pb-20 px-4 md:px-8 ${
+      className={`slide min-h-screen flex flex-col justify-start pt-12 pb-24 px-4 md:px-8 ${
         isActive ? "active-slide" : "hidden-slide"
       }`}
       initial="hidden"
@@ -51,7 +51,7 @@ export function Slide({ id, children }: SlideProps) {
       variants={variants}
       style={{ display: isActive ? "flex" : "none" }}
     >
-      <div className="container mx-auto">
+      <div className="container mx-auto overflow-x-auto">
         {children}
       </div>
     </motion.section>
