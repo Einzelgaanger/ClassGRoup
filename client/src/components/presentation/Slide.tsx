@@ -49,7 +49,14 @@ export function Slide({ id, children }: SlideProps) {
       animate={isActive ? "visible" : "hidden"}
       exit="exit"
       variants={variants}
-      style={{ display: isActive ? "flex" : "none" }}
+      style={{ 
+        opacity: isActive ? 1 : 0,
+        pointerEvents: isActive ? "auto" : "none",
+        position: "absolute",
+        width: "100%",
+        top: 0,
+        left: 0
+      }}
     >
       <div className="container mx-auto overflow-x-auto">
         {children}
