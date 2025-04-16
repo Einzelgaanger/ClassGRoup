@@ -75,5 +75,6 @@ export default defineConfig({
   preview: {
     port: process.env.PORT ? parseInt(process.env.PORT) : 4173,
     host: true,
+    allowedHosts: ['algostruct.onrender.com', 'localhost', '127.0.0.1'],
   },
 });
